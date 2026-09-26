@@ -1,0 +1,32 @@
+form input,
+form textarea{
+    border: 2px solid gray;
+    border-radius: 8px;
+    padding:8px;
+    transition: 0.3s;
+}
+
+form input:focus, /*el focus se aplica cuando estás escribiendo dentro del input*/
+form textarea:focus{
+    border-color: blue;
+    outline: none;
+}
+
+button {
+    padding: 10px 20px;
+    transition: 0.3s;/*hace que esos cambios sean suaves en vez de instantáneos.*/
+}
+button:hover { /*hover se activa cuando pasás el mouse sobre el botón.*/
+    background-color: lightblue;
+}
+
+button:active { /*se activa mientras estás haciendo clic en el botón.*/
+    background-color: blue;
+    color: white;
+}
+
+form{
+    display:flex;
+    align-items: flex-start;
+    gap:20px;
+}

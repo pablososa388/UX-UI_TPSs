@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ejercicio 17 - Menú hamburguesa</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="encabezado">
+    <h1 class="logo">Mi sitio</h1>
+
+    <!-- El checkbox tiene que ir ANTES del label y del nav: los selectores + y ~
+         solo miran hacia adelante, a los hermanos que vienen después -->
+    <input type="checkbox" id="menu-toggle" class="menu-toggle">
+
+    <!-- for="menu-toggle" apunta al id del checkbox: así clickear el label lo tilda.
+         Esa asociación es la accesibilidad básica que pide el ejercicio -->
+    <label for="menu-toggle" class="menu-icono">☰ Menú</label>
+
+    <nav class="menu">
+      <ul>
+        <li><a href="#">Inicio</a></li>
+        <li><a href="#">Servicios</a></li>
+        <li><a href="#">Nosotros</a></li>
+        <li><a href="#">Contacto</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="contenido">
+    <p>Contenido de la página (achicar/agrandar para ver el menu colapsado).</p>
+  </main>
+</body>
+</html>

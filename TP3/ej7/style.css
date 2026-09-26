@@ -1,0 +1,16 @@
+/* width=ancho de la tarjeta */
+/*.card= selector de clase*/
+.card{
+    width:200px; /*ancho de la card*/
+    height: 150px;/*alto*/
+
+    margin:10px;/*espacio entre la card y los elementos q esten por fuera de ella*/
+    padding:20px;/*espacio entre el borde de la tarjeta/card y el contenido (hd y p)*/
+    border:2px solid black;/*borde de la tarjeta*/
+
+    box-sizing: border-box;/*el tamaño que puse ya incluye padding y borde*/
+    display: inline-block; /*deja todas las cards en filas*/
+    background-color: crimson; /*esto no lo pedia pero bueno*/
+    vertical-align: top;/* esto aca sirve para que quede alineado arriba*/
+
+}

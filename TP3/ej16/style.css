@@ -1,0 +1,116 @@
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+}
+
+/* ===== ANIMACIONES ===== */
+
+/* Gira el elemento una vuelta completa */
+@keyframes girar {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Parpadeo: con porcentajes se pueden poner más de 2 pasos.
+   El ojo está abierto casi todo el ciclo y se achata (scaleY) un instante */
+@keyframes parpadear {
+  0%, 90%, 100% { transform: scaleY(1); }    /* abierto */
+  95%           { transform: scaleY(0.1); }  /* casi cerrado (scaleY escala solo el alto) */
+}
+
+@keyframes aparecer {
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== GATO ===== */
+
+.gato {
+  position: relative;            /* los hijos con position: absolute se ubican respecto a este div */
+  width: 100px;
+  height: 100px;
+  background-color: #f4a640;
+  border-radius: 50%;            /* cabeza redonda */
+
+  animation-name: girar;
+  animation-duration: 1.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+/* ::before y ::after crean elementos "extra" dentro del div sin tocar el HTML.
+   Necesitan content: "" para existir. Acá los usamos como orejas. */
+.gato::before,
+.gato::after {
+  content: "";
+  position: absolute;            /* absolute = lo ubico con top/left/right, sin empujar a los demás */
+  top: -18px;
+  /* Truco del triángulo: un elemento sin ancho ni alto, con bordes gruesos.
+     Los bordes laterales transparentes y el de abajo con color forman un triángulo */
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-bottom: 40px solid #f4a640;
+}
+
+.gato::before {
+  left: 4px;
+  transform: rotate(-20deg);     /* inclina la oreja izquierda */
+}
+
+.gato::after {
+  right: 4px;
+  transform: rotate(20deg);      /* inclina la oreja derecha */
+}
+
+.ojo {
+  position: absolute;
+  top: 38px;
+  width: 12px;
+  height: 12px;
+  background-color: #222222;
+  border-radius: 50%;
+  animation: parpadear 2s ease-in-out infinite;  /* forma abreviada: nombre, duración, timing, iteraciones */
+}
+
+.ojo-izq { left: 24px; }
+.ojo-der { right: 24px; }
+
+.nariz {
+  position: absolute;
+  top: 56px;
+  left: 44px;
+  /* Otro triángulo con bordes, pero apuntando hacia abajo (border-top con color) */
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 8px solid #e07a8a;
+}
+
+/* Bigotes: una caja con solo borde arriba y abajo = dos líneas paralelas */
+.bigote {
+  position: absolute;
+  top: 62px;
+  width: 28px;
+  height: 8px;
+  border-top: 2px solid #333333;
+  border-bottom: 2px solid #333333;
+}
+
+.bigote-izq { left: -18px; }
+.bigote-der { right: -18px; }
+
+/* ===== TARJETA ===== */
+
+.tarjeta {
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  animation: aparecer 1.2s ease-out 1;
+}

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Casa Verde - Plantas y jardinería</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- HTML semántico: header para la cabecera, nav para la navegación,
+       main para el contenido principal, section para cada bloque y footer para el pie -->
+  <header class="navbar">
+  <a href="#inicio" class="logo">🌿 Casa Verde</a>
+
+  <!-- Mismo truco del ejercicio 17: el checkbox va ANTES del nav para poder usar ~ -->
+  <input type="checkbox" id="menu-toggle" class="menu-toggle">
+  <label for="menu-toggle" class="menu-icono">☰ Menú</label>
+
+  <nav class="menu-nav" aria-label="Navegación principal">
+    <ul class="menu">
+      <li><a href="#inicio">Inicio</a></li>
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#testimonios">Opiniones</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+  </nav>
+</header>
+  <main>
+
+    <!-- HERO -->
+    <section id="inicio" class="hero">
+      <div class="hero-contenido">
+        <h1>Llevá la naturaleza a tu hogar</h1>
+        <p>Diseñamos, plantamos y cuidamos tus espacios verdes.</p>
+        <a href="#contacto" class="boton">Pedir presupuesto</a>
+      </div>
+    </section>
+
+    <!-- SERVICIOS -->
+    <section id="servicios">
+      <div class="contenedor">
+        <h2 class="titulo-seccion">Nuestros servicios</h2>
+        <div class="grid-servicios">
+          <article class="tarjeta">
+            <span class="icono" aria-hidden="true">🪴</span>
+            <h3>Plantas de interior</h3>
+            <p>Selección de plantas para cada ambiente y nivel de luz.</p>
+          </article>
+          <article class="tarjeta">
+            <span class="icono" aria-hidden="true">🌳</span>
+            <h3>Diseño de jardines</h3>
+            <p>Proyectos a medida para patios, terrazas y balcones.</p>
+          </article>
+          <article class="tarjeta">
+            <span class="icono" aria-hidden="true">✂️</span>
+            <h3>Mantenimiento</h3>
+            <p>Podas, riego y cuidado periódico de tu jardín.</p>
+          </article>
+          <article class="tarjeta">
+            <span class="icono" aria-hidden="true">💬</span>
+            <h3>Asesoría</h3>
+            <p>Consejos personalizados para que tus plantas vivan más.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIOS (carrusel) -->
+    <section id="testimonios" class="fondo-alt">
+      <div class="contenedor">
+        <h2 class="titulo-seccion">Lo que dicen nuestros clientes</h2>
+        <!-- tabindex="0" permite recorrer el carrusel con las flechas del teclado -->
+        <div class="carrusel" role="region" aria-label="Testimonios de clientes" tabindex="0">
+          <article class="testimonio">
+            <blockquote>Mi patio cambió por completo, quedó hermoso.</blockquote>
+            <p class="autor">— Lucía P.</p>
+          </article>
+          <article class="testimonio">
+            <blockquote>Muy puntuales y atentos, las plantas siguen impecables.</blockquote>
+            <p class="autor">— Martín G.</p>
+          </article>
+          <article class="testimonio">
+            <blockquote>Me asesoraron para el balcón y salió perfecto.</blockquote>
+            <p class="autor">— Sofía R.</p>
+          </article>
+          <article class="testimonio">
+            <blockquote>Recomendadísimos, volvería a contratarlos sin dudar.</blockquote>
+            <p class="autor">— Andrés L.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section id="contacto">
+      <div class="contenedor">
+        <h2 class="titulo-seccion">Contactanos</h2>
+        <form class="formulario" action="#" method="post">
+          <div>
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required>
+          </div>
+          <div>
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="nombre@correo.com" required>
+          </div>
+          <div>
+            <label for="mensaje">Mensaje</label>
+            <textarea id="mensaje" name="mensaje" rows="4" placeholder="Contanos qué necesitás" required></textarea>
+          </div>
+          <button type="submit" class="boton">Enviar</button>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="pie">
+    <p>© 2026 Casa Verde</p>
+    <p>Ejercicio 20 - Landing page</p>
+  </footer>
+
+</body>
+</html>

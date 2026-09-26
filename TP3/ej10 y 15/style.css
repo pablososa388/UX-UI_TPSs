@@ -1,0 +1,88 @@
+/* ===== ENFOQUE: MOBILE FIRST =====
+   Justificación: los estilos base son los del celular (una columna, sin sidebar)
+   y solo se agregan cosas cuando la pantalla es más ancha (min-width).
+   Así el celular carga menos reglas y no hay que "deshacer" nada. */
+
+/* Evita que padding y bordes agranden los elementos más de lo que declaraste */
+* {
+  box-sizing: border-box;
+}
+
+/* El body trae 8px de margen por defecto: sacarlo evita scroll de más */
+body {
+  margin: 0;
+}
+
+/* ===== ESTILOS BASE (celular, menos de 768px) ===== */
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr); /* UNA sola columna. minmax(0, 1fr) impide que
+                                            contenido largo empuje el ancho y cause overflow */
+  grid-template-rows: 80px 1fr 60px;/*define las filas. Header de 80px, contenido flexible y footer de 60px.*/ 
+
+  /* Cada línea entre comillas es una fila. Acá no hay "sidebar": solo 3 filas */
+  grid-template-areas:
+    "header"
+    "main"
+    "footer";
+
+  min-height: 100vh;/*hace que el layout ocupe como mínimo toda la altura de la ventana, en vez de quedar amontonado arriba.*/ /* TUYO */
+}
+
+header {
+  grid-area: header;
+  background-color: blueviolet;
+}
+
+/* Antes decía "sidebar", pero esa etiqueta no existe: la del HTML es <aside> */
+aside {
+  grid-area: sidebar;
+  background-color: black;
+  color: white;
+  display: none; /* display: none saca el elemento de la página: en el celular desaparece */
+}
+
+main {
+  grid-area: main;
+  background-color: violet;
+}
+
+footer {
+  grid-area: footer;
+  background-color: blueviolet;
+}
+
+/* ===== BREAKPOINT 1: pantallas de 768px o más (tablet/escritorio) =====
+   @media (min-width: 768px) = "aplicá lo de adentro SOLO si la ventana mide 768px o más".
+   Acá solo se escribe lo que CAMBIA respecto a la base; el resto se hereda. */
+@media (min-width: 900px) {
+  .layout {
+    grid-template-columns: 200px minmax(0, 1fr);/*define las columnas. Una de 200px y otra que ocupa el resto (1fr).*/ 
+    grid-template-areas:
+      "header header"
+      "sidebar main"
+      "footer footer";
+      
+  }
+  
+
+
+  aside {
+    display: block; /* el sidebar reaparece */
+  }
+}
+
+/* ===== BREAKPOINT 2: pantallas de 1200px o más (escritorio grande) ===== */
+@media (min-width: 1200px) {
+  .layout {
+    grid-template-columns: 250px minmax(0, 1fr); /* sidebar más ancho */
+    grid-template-rows: 100px 1fr 80px;          /* header y footer más altos */
+  }
+}
+
+@media (min-width: 700px) { /*cuando cambio el ancho a 700 o mas se pone naranaj el header*/
+  header {
+    background-color: orange;
+  }
+}

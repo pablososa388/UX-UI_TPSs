@@ -1,0 +1,14 @@
+/* Pseudo-clase 1 */
+a:hover { /*se aplica cuando pasás el mouse por encima.*/
+    color: red;
+}
+
+/* Pseudo-clase 2 */
+li:nth-child(even) { /*selecciona los elementos pares*/
+    background-color: lightgray;
+}
+
+/* Pseudo-elemento */
+li::before {/*agrega contenido antes del elemento*/
+    content: "🐱 ";/*agrega el toga antes del elemento*/
+}

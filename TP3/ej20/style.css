@@ -1,0 +1,369 @@
+/* ==========================================================
+   1. VARIABLES
+   ========================================================== */
+:root {
+  --color-primario: #2f7d4f;
+  --color-primario-oscuro: #1f5c38;
+  --color-fondo: #f6f8f5;
+  --color-superficie: #ffffff;
+  --color-texto: #1f2937;
+  --color-error: #d93025;
+
+  --espaciado: 1rem;
+  --espaciado-seccion: 4rem;
+  --radio: 10px;
+  --altura-navbar: 64px;
+  --sombra: 0 4px 12px rgba(0, 0, 0, 0.12);
+  --fuente: Arial, sans-serif;
+}
+
+/* ==========================================================
+   2. BASE
+   ========================================================== */
+* {
+  box-sizing: border-box;
+}
+
+/* scroll-behavior: smooth = al clickear un link interno (#servicios), la página se
+   desliza suave hasta la sección en vez de saltar de golpe */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--fuente);
+  color: var(--color-texto);
+  background-color: var(--color-fondo);
+  line-height: 1.6;   /* espacio entre renglones */
+}
+
+section {
+  padding: var(--espaciado-seccion) var(--espaciado);
+  /* Como la navbar es fija y tapa la parte de arriba, este margen hace que
+     el scroll frene un poco antes y el título de la sección no quede escondido */
+  scroll-margin-top: var(--altura-navbar);
+}
+
+.contenedor {
+  max-width: 1100px;   /* en pantallas grandes el contenido no se estira de más */
+  margin: 0 auto;      /* auto a los lados = centrado */
+}
+
+.titulo-seccion {
+  margin: 0 0 2rem;
+  text-align: center;
+  font-size: 1.8rem;
+}
+
+.fondo-alt {
+  background-color: var(--color-superficie);   /* fondo distinto para separar secciones */
+}
+
+.boton {
+  display: inline-block;
+  padding: 0.8rem 1.5rem;
+  font: inherit;               /* el botón hereda la fuente del resto (por defecto usa otra) */
+  color: white;
+  text-decoration: none;
+  background-color: var(--color-primario);
+  border: none;
+  border-radius: var(--radio);
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.boton:hover {
+  background-color: var(--color-primario-oscuro);
+}
+
+/* ==========================================================
+   3. ANIMACIÓN
+   ========================================================== */
+@keyframes aparecer {
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================================
+   4. NAVBAR (Flexbox + menú hamburguesa solo con CSS)
+   ========================================================== */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--altura-navbar);
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;   /* logo a la izquierda, ícono a la derecha */
+  align-items: center;
+  padding: 0 var(--espaciado);
+  background-color: var(--color-superficie);
+  box-shadow: var(--sombra);
+}
+
+.logo {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: var(--color-primario);
+  text-decoration: none;
+}
+
+/* Checkbox oculto (con opacity y no display: none, para que el teclado pueda llegar) */
+.menu-toggle {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.menu-toggle:focus-visible + .menu-icono {
+  outline: 2px solid var(--color-primario);
+}
+
+.menu-icono {
+  font-size: 1.2rem;
+  color: var(--color-primario);
+  cursor: pointer;
+  user-select: none;
+}
+
+/* En celular el nav es un panel que se despliega justo debajo de la navbar.
+   top: 100% = pegado al borde inferior de la navbar (que es su "padre" posicionado) */
+.menu-nav {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  max-height: 0;                        /* cerrado */
+  overflow: hidden;
+  background-color: var(--color-superficie);
+  transition: max-height 0.4s ease;     /* animación de apertura y cierre */
+}
+
+/* Cuando el checkbox está tildado, el panel se abre */
+.menu-toggle:checked ~ .menu-nav {
+  max-height: 300px;
+  box-shadow: var(--sombra);
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;     /* links uno abajo del otro */
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.menu a {
+  display: block;             /* todo el renglón es clickeable */
+  padding: 0.9rem var(--espaciado);
+  color: var(--color-texto);
+  text-decoration: none;
+}
+
+.menu a:hover {
+  color: var(--color-primario);
+  background-color: var(--color-fondo);
+}
+
+/* ==========================================================
+   5. HERO
+   ========================================================== */
+.hero {
+  min-height: 100vh;      /* ocupa como mínimo toda la pantalla */
+  display: flex;          /* Flexbox para centrar el contenido en el medio */
+  align-items: center;
+  justify-content: center;
+  padding: calc(var(--altura-navbar) + var(--espaciado)) var(--espaciado) var(--espaciado);
+  text-align: center;
+  color: white;
+
+  background-color: var(--color-primario-oscuro);   /* color de respaldo si no carga la imagen */
+  /* Se apilan dos fondos: primero una capa negra semitransparente (para que se lea el texto)
+     y abajo la imagen. Poné una foto llamada hero.jpg en la misma carpeta */
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
+    url("hero.jpg");
+  background-size: cover;       /* la imagen llena todo el espacio, recortándose si hace falta */
+  background-position: center;
+}
+
+.hero-contenido {
+  max-width: 600px;
+  animation: aparecer 1s ease-out 1;   /* el texto entra con fade-in + slide-up */
+}
+
+.hero h1 {
+  margin: 0 0 1rem;
+  font-size: 2rem;
+}
+
+.hero p {
+  margin: 0 0 1.5rem;
+  font-size: 1.1rem;
+}
+
+/* ==========================================================
+   6. SERVICIOS (Grid)
+   ========================================================== */
+.grid-servicios {
+  display: grid;
+  /* auto-fit: crea tantas columnas de mínimo 220px como entren y, si sobra lugar,
+     las estira. En celular queda 1 columna, y en pantallas grandes hasta 4 */
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+
+.tarjeta {
+  padding: 1.5rem;
+  text-align: center;
+  background-color: var(--color-superficie);
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+  transition: transform 0.2s;
+}
+
+.tarjeta:hover {
+  transform: translateY(-4px);   /* sube un poquito al pasar el mouse */
+}
+
+.icono {
+  font-size: 2.5rem;
+}
+
+.tarjeta h3 {
+  margin: 0.5rem 0;
+}
+
+.tarjeta p {
+  margin: 0;
+}
+
+/* ==========================================================
+   7. TESTIMONIOS (carrusel con scroll-snap)
+   ========================================================== */
+.carrusel {
+  display: flex;                    /* los testimonios en una sola fila */
+  gap: 1rem;
+  overflow-x: auto;                 /* la fila se desplaza horizontalmente DENTRO de este div */
+  scroll-snap-type: x mandatory;    /* al soltar, el scroll se "engancha" siempre a un testimonio */
+  padding-bottom: 1rem;             /* lugar para la barra de scroll */
+}
+
+.testimonio {
+  flex: 0 0 85%;                    /* no crece, no se achica, mide 85% del carrusel */
+  scroll-snap-align: center;        /* el testimonio queda centrado al engancharse */
+  padding: 1.5rem;
+  background-color: var(--color-fondo);
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+}
+
+.testimonio blockquote {
+  margin: 0 0 1rem;
+  font-style: italic;
+}
+
+.autor {
+  margin: 0;
+  font-weight: bold;
+  color: var(--color-primario);
+}
+
+/* ==========================================================
+   8. FORMULARIO DE CONTACTO
+   ========================================================== */
+.formulario {
+  display: flex;
+  flex-direction: column;   /* campos uno abajo del otro */
+  gap: 1rem;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.formulario label {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-weight: bold;
+}
+
+.formulario input,
+.formulario textarea {
+  width: 100%;
+  padding: 0.7rem;
+  font: inherit;
+  border: 2px solid #d1d5db;
+  border-radius: var(--radio);
+}
+
+.formulario input:focus,
+.formulario textarea:focus {
+  outline: none;
+  border-color: var(--color-primario);
+}
+
+/* Error solo cuando el usuario ya escribió algo (mismo truco del ejercicio 19) */
+.formulario input:not(:placeholder-shown):invalid,
+.formulario textarea:not(:placeholder-shown):invalid {
+  border-color: var(--color-error);
+}
+
+/* ==========================================================
+   9. FOOTER (Flexbox)
+   ========================================================== */
+.pie {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 2rem var(--espaciado);
+  text-align: center;
+  color: white;
+  background-color: var(--color-primario-oscuro);
+}
+
+.pie p {
+  margin: 0;
+}
+
+/* Tablet: 600px o más */
+@media (min-width: 600px) {
+  /* El menú deja de ser un panel desplegable y pasa a ser una fila normal */
+  .menu-icono {
+    display: none;
+  }
+
+  /* Se listan los dos selectores porque el segundo (con :checked) tiene más peso
+     y, si el menú quedó abierto en celular, pisaría estos valores al agrandar la ventana */
+  .menu-nav,
+  .menu-toggle:checked ~ .menu-nav {
+    position: static;
+    width: auto;
+    max-height: none;
+    overflow: visible;
+    box-shadow: none;
+  }
+
+  .menu {
+    flex-direction: row;
+    gap: 1.5rem;
+  }
+
+  .menu a {
+    padding: 0;
+  }
+
+  .menu a:hover {
+    background-color: transparent;
+  }
+
+  .testimonio {
+    flex-basis: 45%;
+  }
+
+  .pie {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}

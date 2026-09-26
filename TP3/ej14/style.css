@@ -1,0 +1,71 @@
+/* ===== VARIABLES ===== */
+:root {
+  /* Colores */
+  --color-primario: #2563eb;
+  --color-secundario: #7c3aed;
+  --color-fondo: #f5f5f5;
+  --color-superficie: #ffffff;
+  --color-texto: #1f2937;
+
+  /* Espaciado y forma */
+  --espaciado: 1rem;
+  --radio: 8px;
+
+  /* Tipografía */
+  --fuente: Arial, sans-serif;
+}
+
+/* ===== MODO OSCURO (solo cambian las variables) ===== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-fondo: #111827;
+    --color-superficie: #1f2937;
+    --color-texto: #f3f4f6;
+  }
+}
+
+/* ===== ESTILOS GENERALES ===== */
+body {
+  margin: 0;
+  font-family: var(--fuente);
+  background-color: var(--color-fondo);
+  color: var(--color-texto);
+}
+
+/* ===== ENCABEZADO Y PIE ===== */
+.encabezado,
+.pie {
+  background-color: var(--color-primario);
+  color: #ffffff;
+  padding: var(--espaciado);
+  text-align: center;
+}
+
+/* ===== CONTENIDO ===== */
+.contenido {
+  display: flex;
+  gap: var(--espaciado);
+  padding: var(--espaciado);
+}
+
+.tarjeta {
+  flex: 1;
+  background-color: var(--color-superficie);
+  padding: var(--espaciado);
+  border-radius: var(--radio);
+  border: 2px solid var(--color-secundario);
+}
+
+/* ===== BOTONES ===== */
+.boton {
+  display: inline-block;
+  background-color: var(--color-primario);
+  color: #ffffff;
+  padding: calc(var(--espaciado) / 2) var(--espaciado);
+  border-radius: var(--radio);
+  text-decoration: none;
+}
+
+.boton-secundario {
+  background-color: var(--color-secundario);
+}

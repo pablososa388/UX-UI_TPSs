@@ -1,0 +1,105 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+/* ===== ENCABEZADO ===== */
+
+.encabezado {
+  display: flex;
+  flex-wrap: wrap;                 /* permite que el nav baje a una segunda fila */
+  justify-content: space-between;  /* logo a la izquierda, ícono a la derecha */
+  align-items: center;
+  padding: 1rem;
+  background-color: #2563eb;
+  color: white;
+}
+
+.logo {
+  margin: 0;
+  font-size: 1.3rem;
+}
+
+/* ===== CHECKBOX OCULTO ===== */
+
+/* Lo escondemos con opacity: 0 y NO con display: none.
+   Con display: none el teclado no podría llegar al checkbox (mala accesibilidad).
+   Así se puede tabular hasta él y abrir el menú con la barra espaciadora */
+.menu-toggle {
+  position: absolute;   /* lo saca del flujo para que no ocupe lugar en el flex */
+  opacity: 0;
+}
+
+/* + = hermano INMEDIATO: el label que viene justo después del checkbox.
+   :focus-visible = cuando se llegó con el teclado. Dibuja un contorno para verlo */
+.menu-toggle:focus-visible + .menu-icono {
+  outline: 2px solid white;
+}
+
+/* ===== ÍCONO (LABEL) ===== */
+
+.menu-icono {
+  font-size: 1.3rem;
+  cursor: pointer;      /* cursor de manito al pasar por encima */
+  user-select: none;    /* evita que el texto se seleccione al hacer doble clic */
+}
+
+/* ===== MENÚ (celular: cerrado por defecto) ===== */
+
+.menu {
+  width: 100%;          /* ocupa toda la fila, debajo del logo y el ícono */
+  max-height: 0;        /* cerrado: alto máximo 0 */
+  overflow: hidden;     /* lo que sobra del alto máximo se esconde */
+  transition: max-height 0.4s ease;  /* TRANSICIÓN: cuando max-height cambia, lo hace en 0.4s.
+                                        No se puede animar display: none, por eso se usa max-height */
+}
+
+/* ~ = cualquier hermano que venga DESPUÉS (no hace falta que sea el inmediato).
+   Lee: "cuando el checkbox está tildado, al .menu que viene después dale este estilo" */
+.menu-toggle:checked ~ .menu {
+  max-height: 300px;    /* abierto: tiene que ser MAYOR al alto real del menú */
+}
+
+.menu ul {
+  list-style: none;     /* saca las viñetas */
+  margin: 0;
+  padding: 0;
+}
+
+.menu a {
+  display: block;       /* el link ocupa todo el ancho, así se clickea más fácil */
+  padding: 0.8rem 1rem;
+  color: white;
+  text-decoration: none;
+}
+
+.menu a:hover {
+  background-color: rgba(255, 255, 255, 0.2);  /* blanco semitransparente */
+}
+
+.contenido {
+  padding: 1rem;
+}
+
+/* ===== PANTALLAS GRANDES (768px o más) ===== */
+
+@media (min-width: 768px) {
+  .menu-icono {
+    display: none;          /* ya no hace falta el ícono */
+  }
+
+  .menu {
+    width: auto;            /* deja de ocupar toda la fila */
+    max-height: none;       /* siempre visible */
+    overflow: visible;
+  }
+
+  .menu ul {
+    display: flex;          /* los links en fila */
+    gap: 1rem;
+  }
+}

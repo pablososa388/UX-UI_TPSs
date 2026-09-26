@@ -1,0 +1,145 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+}
+
+.formulario {
+  width: 100%;
+  max-width: 400px;
+  padding: 1.5rem;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* ===== RADIOS OCULTOS ===== */
+
+.paso-radio {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ===== PASOS ===== */
+
+fieldset {
+  border: none;      /* fieldset trae un borde por defecto */
+  margin: 0;
+  padding: 0;
+}
+
+legend {
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+/* Todos los pasos arrancan ocultos... */
+.paso {
+  display: none;
+}
+
+/* ...y se muestra solo el que corresponde al radio tildado.
+   "#ir-paso1:checked ~ .paso-1" = cuando el radio ir-paso1 está tildado,
+   mostrá el .paso-1 que viene después. */
+#ir-paso1:checked ~ .paso-1,
+#ir-paso2:checked ~ .paso-2 {
+  display: block;
+  animation: aparecer 0.4s ease-out;   /* transición entre pasos (mismo recurso del ejercicio 16) */
+}
+
+@keyframes aparecer {
+  from { opacity: 0; transform: translateX(20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* ===== CAMPOS ===== */
+
+.campo {
+  margin-bottom: 1rem;
+}
+
+.campo label {
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"] {
+  width: 100%;
+  padding: 0.6rem;
+  font-size: 1rem;
+  border: 2px solid #cccccc;
+  border-radius: 6px;
+}
+
+/* :required = todo input que tenga el atributo required.
+   Le marcamos un borde izquierdo más grueso para indicar "obligatorio" */
+input:required {
+  border-left-width: 6px;
+}
+
+/* ===== VALIDACIÓN VISUAL ===== */
+
+/* :valid = el valor cumple las reglas (required, minlength, type="email", etc.)
+   :invalid = no las cumple.
+   Problema: un campo vacío obligatorio es :invalid desde el inicio, y saldría todo rojo al cargar.
+   Solución: :placeholder-shown es verdadero mientras el campo está vacío (se ve el placeholder),
+   y :not() lo niega. Así el color aparece recién cuando el usuario empezó a escribir. */
+input:not(:placeholder-shown):valid {
+  border-color: #22a559;   /* verde */
+}
+
+input:not(:placeholder-shown):invalid {
+  border-color: #d93025;   /* rojo */
+}
+
+/* Mensaje de error: oculto, y visible solo cuando el input anterior (+) es inválido */
+.error {
+  display: none;
+  margin-top: 0.3rem;
+  font-size: 0.85rem;
+  color: #d93025;
+}
+
+input:not(:placeholder-shown):invalid + .error {
+  display: block;
+}
+
+/* ===== BOTONES ===== */
+
+.boton {
+  display: inline-block;
+  padding: 0.7rem 1.2rem;
+  font-size: 1rem;
+  color: white;
+  background-color: #2563eb;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.boton-volver {
+  background-color: #6b7280;
+}
+
+/* Sin JS no hay forma de frenar el avance al paso 2 con datos inválidos.
+   :has() = "el elemento que TIENE adentro tal cosa". Lee: "si el formulario tiene algún campo
+   inválido dentro del paso 1, apagá el botón Siguiente". pointer-events: none impide el clic.
+   Esto es necesario: si se pasara al paso 2 con el paso 1 inválido, el navegador bloquearía
+   el envío por un campo oculto y no mostraría ningún mensaje. */
+.formulario:has(.paso-1 :invalid) .boton-siguiente {
+  opacity: 0.4;
+  pointer-events: none;
+}

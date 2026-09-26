@@ -1,0 +1,22 @@
+.galeria{
+    display:flex;/*las tarjetas se acomodan en fila.*/
+    flex-wrap: wrap;/*cuando no entran, pasan a otra fila.*/
+    gap:20px;
+
+}
+.card{
+    flex-basis: 200px;/*tamaño base de cada tarjeta.*/
+    flex-grow: 1;/*pueden crecer para aprovechar el espacio disponible.*/
+    background-color: yellow;
+    padding: 15px;
+}
+button{
+    padding:10px 20px
+}
+
+.card img{
+    width: 200px;
+    height: 200px;
+    object-fit: contain; /*mantiene toda la imagen y, si sobra espacio, deja un margen vacío*/
+
+}

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ejercicio 19 - Formulario multi-step</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <form class="formulario" action="#" method="get">
+
+    <!-- Radios ocultos: el que está tildado decide qué paso se ve.
+         Van ANTES de los pasos para poder usar el selector ~ desde el CSS -->
+    <input type="radio" name="paso" id="ir-paso1" class="paso-radio" checked>
+    <input type="radio" name="paso" id="ir-paso2" class="paso-radio">
+
+    <!-- ===== PASO 1 ===== -->
+    <fieldset class="paso paso-1">
+      <legend>Paso 1 de 2: tus datos</legend>
+
+      <div class="campo">
+        <label for="nombre">Nombre</label>
+        <!-- required = obligatorio. minlength = mínimo de letras.
+             El placeholder es necesario para el truco de :placeholder-shown del CSS -->
+        <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required minlength="3">
+        <span class="error">Mínimo 3 caracteres</span>
+      </div>
+
+      <div class="campo">
+        <label for="email">Email</label>
+        <!-- type="email" hace que el navegador valide el formato solo (algo@algo.com) -->
+        <input type="email" id="email" name="email" placeholder="nombre@correo.com" required>
+        <span class="error">Ingresá un email válido</span>
+      </div>
+
+      <!-- Un label con for="ir-paso2" tilda ese radio al hacer clic: cambia de paso -->
+      <label for="ir-paso2" class="boton boton-siguiente">Siguiente →</label>
+    </fieldset>
+
+    <!-- ===== PASO 2 ===== -->
+    <fieldset class="paso paso-2">
+      <legend>Paso 2 de 2: tu cuenta</legend>
+
+      <div class="campo">
+        <label for="clave">Contraseña</label>
+        <input type="password" id="clave" name="clave" placeholder="Mínimo 8 caracteres" required minlength="8">
+        <span class="error">Mínimo 8 caracteres</span>
+      </div>
+
+      <div class="campo">
+        <label for="edad">Edad</label>
+        <!-- min y max validan el rango del número -->
+        <input type="number" id="edad" name="edad" placeholder="Ej: 25" required min="18" max="99">
+        <span class="error">Tiene que ser entre 18 y 99</span>
+      </div>
+
+      <label for="ir-paso1" class="boton boton-volver">← Volver</label>
+      <button type="submit" class="boton">Registrarme</button>
+    </fieldset>
+
+  </form>
+</body>
+</html>

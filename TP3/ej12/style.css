@@ -1,0 +1,24 @@
+.volver {
+    position: fixed;/*queda fijo en la pantalla aunque hagas scroll.*/
+    bottom: 20px;/*distancia desde abajo.*/
+    right: 20px;/*distancia desde la derecha.*/
+    z-index: 100;/*hace que quede por encima de otros elementos.*/
+}
+.tooltip{
+    position: relative;
+}
+.tooltip span{
+    position:absolute;
+   top:100%;
+    left:0;
+    background-color: black;
+    color: aliceblue;
+    padding:5px;
+    display: none;
+
+}
+
+.tooltip:hover span{ /*hoover:cuando pasás el mouse por encima.*/
+    display:block;
+/* loq hace: Cuando paso el mouse sobre .tooltip, aplicá estos estilos al span que está adentro. */
+}

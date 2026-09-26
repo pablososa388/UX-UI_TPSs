@@ -1,0 +1,11 @@
+nav{
+    display:flex; /*display: flex → convierte el nav en un contenedor flex y coloca sus hijos en fila*/
+    justify-content: space-between; /*manda el logo a la izquierda y los links a la derecha, dejando el espacio disponible entre ellos.*/
+    align-items: center;/*alinea verticalmente los elementos en el centro.*/
+
+}
+.links{
+    display: flex;
+    gap:20px; /*separa los 4 links entre sí.*/
+
+}
