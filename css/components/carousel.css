@@ -1,0 +1,90 @@
+@layer components {
+  .products {
+    padding: 5rem 0;
+    position: relative;
+    background-color: var(--color-bg);
+  }
+
+  .products__title {
+    text-align: center;
+    font-family: var(--font-display);
+    font-size: var(--fs-h2);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.28px;
+    color: var(--color-espresso);
+    margin-bottom: 64px;
+  }
+
+  .carousel {
+    position: relative;
+    width: 100%;
+    max-width: 1476px;
+    margin: 0 auto;
+  }
+
+  /* Pista del carrusel con CSS scroll-snap nativo */
+  .carousel__track {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    padding: 1rem 0;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Oculta scrollbar en Firefox */
+  }
+
+  .carousel__track::-webkit-scrollbar {
+    display: none; /* Oculta scrollbar en WebKit */
+  }
+
+  /* Flechas de navegación para desktop */
+  .carousel__arrow {
+    display: none;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 71px;
+    height: 71px;
+    border-radius: var(--radius-pill);
+    background-color: var(--color-white);
+    box-shadow: 0 4px 16px rgba(48, 38, 28, 0.15);
+    color: var(--color-espresso);
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    cursor: pointer;
+    transition: transform var(--transition-fast), background-color var(--transition-fast), box-shadow var(--transition-fast);
+  }
+
+  .carousel__arrow:hover {
+    transform: translateY(-50%) scale(1.05);
+    background-color: var(--color-sand);
+    box-shadow: 0 6px 20px rgba(48, 38, 28, 0.25);
+  }
+
+  .carousel__arrow--prev {
+    left: -35px;
+  }
+
+  .carousel__arrow--prev svg {
+    transform: rotate(180deg);
+  }
+
+  .carousel__arrow--next {
+    right: -35px;
+  }
+
+  /* Breakpoint Desktop lg/xl: mostrar flechas */
+  @media (min-width: 1200px) {
+    .carousel__arrow {
+      display: flex;
+    }
+
+    .carousel__track {
+      gap: 4px;
+      justify-content: space-between;
+    }
+  }
+}

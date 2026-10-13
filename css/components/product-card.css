@@ -1,0 +1,154 @@
+@layer components {
+  .product-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 366px;
+    background-color: var(--color-sand-20);
+    border: 1.5px solid var(--color-sand);
+    border-radius: var(--radius-card);
+    padding: 16px;
+    gap: 16px;
+    flex-shrink: 0;
+    scroll-snap-align: start;
+    transition: box-shadow var(--transition-fast), transform var(--transition-fast);
+  }
+
+  @media (hover: hover) {
+    .product-card:hover {
+      box-shadow: 0 12px 32px rgba(48, 38, 28, 0.12);
+      transform: translateY(-4px);
+    }
+  }
+
+  /* Contenedor de imagen */
+  .product-card__media {
+    position: relative;
+    width: 100%;
+    height: 364px;
+    border-radius: var(--radius-img);
+    overflow: hidden;
+  }
+
+  .product-card__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: var(--radius-img);
+    transition: transform 300ms ease;
+  }
+
+  @media (hover: hover) {
+    .product-card:hover .product-card__img {
+      transform: scale(1.03);
+    }
+  }
+
+  /* Botón de favorito (Checkbox hack CSS-only) */
+  .product-card__fav-checkbox {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .product-card__fav-label {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    width: 38px;
+    height: 38px;
+    border-radius: var(--radius-pill);
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 5;
+    transition: transform var(--transition-fast), background-color var(--transition-fast);
+  }
+
+  .product-card__fav-label:hover {
+    transform: scale(1.1);
+    background: var(--color-white);
+  }
+
+  .product-card__fav-icon {
+    width: 20px;
+    height: 20px;
+    stroke: var(--color-maroon);
+    fill: none;
+    transition: fill var(--transition-fast), stroke var(--transition-fast);
+  }
+
+  /* Estado cuando el checkbox está checked */
+  .product-card__fav-checkbox:checked + .product-card__fav-label .product-card__fav-icon {
+    fill: #d32f2f;
+    stroke: #d32f2f;
+  }
+
+  .product-card__fav-checkbox:focus-visible + .product-card__fav-label {
+    outline: 2px solid var(--color-espresso);
+    outline-offset: 2px;
+  }
+
+  /* Información del producto */
+  .product-card__info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex-grow: 1;
+    justify-content: space-between;
+  }
+
+  .product-card__title {
+    font-family: var(--font-body);
+    font-size: var(--fs-card-title);
+    font-weight: 600;
+    color: var(--color-espresso);
+    line-height: 1.2;
+  }
+
+  .product-card__description {
+    font-family: var(--font-body);
+    font-size: 1.125rem;
+    line-height: 1.4;
+    color: var(--color-maroon);
+  }
+
+  /* Fila de precio y CTA */
+  .product-card__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 0.5rem;
+  }
+
+  .product-card__price {
+    font-family: var(--font-ui);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-maroon);
+  }
+
+  .product-card__btn {
+    background-color: var(--color-maroon);
+    color: var(--color-white);
+    font-family: var(--font-ui);
+    font-size: var(--fs-sm);
+    font-weight: 500;
+    border-radius: var(--radius-btn);
+    padding: 10px 26px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform var(--transition-fast), background-color var(--transition-fast), opacity var(--transition-fast);
+  }
+
+  .product-card__btn:hover {
+    transform: translateY(-2px);
+    opacity: 0.92;
+  }
+}
